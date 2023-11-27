@@ -6,6 +6,8 @@ public class ProductPlantControl : MonoBehaviour
 {
     private bool isReadyToPick;
     private Vector3 originalScale;
+    [SerializeField] private ProductData productData;
+    private BagController bagController;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,19 +25,47 @@ public class ProductPlantControl : MonoBehaviour
     {
         if (other.CompareTag("Player") && isReadyToPick)
         {
-            Debug.Log("fideye dokundu");
-            isReadyToPick = false;
-            StartCoroutine(ProductPicked());
-            
+            bagController = other.GetComponent<BagController>();
+
+            if (bagController.IsEmptySpace())
+            {
+                bagController.AddProductToBag(productData);
+                Debug.Log("Fideye dokunuldu");
+                isReadyToPick = false;
+                StartCoroutine(ProductPicked());
+
+            }
         }
     }
     IEnumerator ProductPicked()
     {
-        
-        transform.localScale = originalScale / 3;
-        yield return new WaitForSeconds(3f);
-        transform.localScale = originalScale;
+        float duration = 1f;
+        float timer = 0;
+
+        Vector3 targetScale = originalScale / 3;
+        while(timer < duration)
+        {
+            float t = timer / duration;
+            Vector3 newScale = Vector3.Lerp(originalScale, targetScale, t);
+            transform.localScale = newScale;
+            timer += Time.deltaTime;
+            yield return null;
+
+        }
+        yield return new WaitForSeconds(5f);
+        timer = 0f;
+        float growBackDuration = 1f;
+
+        while(timer < growBackDuration)
+        {
+            float t = timer / growBackDuration;
+            Vector3 newScale = Vector3.Lerp(targetScale, originalScale, t);
+            transform.localScale = newScale;
+            timer += Time.deltaTime;
+            yield return null;
+        }
         isReadyToPick = true;
+        yield return null;
 
     }
 }
