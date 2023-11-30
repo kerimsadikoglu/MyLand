@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int moveSpeed;
     [SerializeField] private PlayerAnimator playerAnimator;
 
+    private float gravity = -9.81f;
+    private float gravityMultiplier  = 3f;
+    private float gravityVelocity ;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +33,20 @@ public class PlayerMovement : MonoBehaviour
         moveVector.z = moveVector.y;
         moveVector.y = 0;
         playerAnimator.ManageAnimations(moveVector);
+        ApplyGravity();
         characterController.Move(moveVector);
 
+    }
+    private void ApplyGravity()
+    {
+        if(characterController.isGrounded && gravityVelocity < 0.0f)
+        {
+            gravityVelocity = -1f;
+        }
+        else
+        {
+            gravityVelocity += gravity * gravityMultiplier * Time.deltaTime;
+        }
+        moveVector.y = gravityVelocity;
     }
 }
