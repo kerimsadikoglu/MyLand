@@ -29,6 +29,7 @@ public class ProductPlantControl : MonoBehaviour
 
             if (bagController.IsEmptySpace())
             {
+                AudioManager.instance.PlayAudio(AudioClipType.grabClip);
                 bagController.AddProductToBag(productData);
                 Debug.Log("Fideye dokunuldu");
                 isReadyToPick = false;

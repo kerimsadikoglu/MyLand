@@ -5,16 +5,15 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-
     public static UIManager instance;
     [SerializeField] private TextMeshProUGUI coinCountText;
 
+
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
-            
         }
         else
         {
@@ -24,16 +23,16 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void ShowCoinOnScreen(int coins)
+    public void ShowCoinCountOnScreen(int coins)
     {
         coinCountText.text = coins.ToString();
     }
