@@ -6,7 +6,7 @@ using UnityEngine;
 public class PowerUpController : MonoBehaviour
 {
     [SerializeField] private PowerUpData powerUpData;
-    private PlayerMovement playerMovement;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +24,7 @@ public class PowerUpController : MonoBehaviour
         {
             if (powerUpData.powerUpType == PowerUpType.speedBooster )
             {
-
-                
+                PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
                 playerMovement.IncreaseSpeed(powerUpData.boostCount);
                 AudioManager.instance.PlayAudio(AudioClipType.grabClip);
                 

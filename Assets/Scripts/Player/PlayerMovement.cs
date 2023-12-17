@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        moveSpeed = LoadSpeed();
+        //moveSpeed = LoadSpeed();
     }
 
     // Update is called once per frame
