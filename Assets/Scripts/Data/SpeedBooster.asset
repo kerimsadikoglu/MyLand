@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SpeedBooster
   m_EditorClassIdentifier: 
   powerUpType: 0
-  boostCount: 50
+  boostCount: 20

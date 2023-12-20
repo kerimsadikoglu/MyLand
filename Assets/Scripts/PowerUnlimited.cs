@@ -43,8 +43,10 @@ public class PowerUnlimited : MonoBehaviour
                 PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
                 playerMovement.IncreaseSpeed(powerUpData.boostCount);
                 AudioManager.instance.PlayAudio(AudioClipType.grabClip);
-                price += 5; // price deðerini 5 artýr
+                price = price*2; // price deðerini 5 artýr
                 priceText.text = price.ToString(); // priceText'i güncelle
+                
+
             }
             //UnlockUnit();
             // ürünü paran yetere aç
